@@ -376,6 +376,8 @@ type PlaybackInfoOption = {
   EnableDirectStream?: boolean
   LiveStreamId?: string
   AutoOpenLiveStream?: boolean
+  AllowVideoStreamCopy?: boolean
+  AllowAudioStreamCopy?: boolean
 }
 
 type MediaResolution = '8K' | '4K' | 'HD' | 'SD'

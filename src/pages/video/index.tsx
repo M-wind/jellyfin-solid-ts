@@ -68,8 +68,14 @@ const Video = () => {
     itemId: string,
     { refetching }: { refetching: PlaybackInfoOption | boolean },
   ) => {
-    let a: PlaybackInfoOption = {}
-    if (typeof refetching !== 'boolean') a = refetching
+    // All transcoding
+    let a: PlaybackInfoOption = {
+      EnableDirectPlay: false,
+      EnableDirectStream: false,
+      AllowVideoStreamCopy: false,
+      AllowAudioStreamCopy: false,
+    }
+    if (typeof refetching !== 'boolean') a = { ...a, ...refetching }
     return await getPalybackInfo(itemId, {
       UserId: state.userId,
       StartTimeTicks: item?.UserData.PlaybackPositionTicks || 0,
@@ -114,8 +120,29 @@ const Video = () => {
           if (sources.TranscodingSubProtocol === 'hls') {
             hlsClean()
             hls = new Hls()
-            hls.attachMedia(video)
             hls.loadSource(getBaseUrl() + sources.TranscodingUrl!)
+            hls.attachMedia(video)
+            // hls.on(Hls.Events.ERROR, (_, data) => {
+            //   switch (data.details) {
+            //     case Hls.ErrorDetails.FRAG_PARSING_ERROR:
+            //       hlsClean()
+            //       refetching({
+            //         EnableDirectPlay: false,
+            //         EnableDirectStream: false,
+            //         AllowAudioStreamCopy: false,
+            //       })
+            //       break
+            //     default:
+            //       hlsClean()
+            //       refetching({
+            //         EnableDirectPlay: false,
+            //         EnableDirectStream: false,
+            //         AllowVideoStreamCopy: false,
+            //         AllowAudioStreamCopy: false,
+            //       })
+            //       break
+            //   }
+            // })
           } else {
             const param = `Static=true&MediaSourceId=${sources.Id}&Tag=${sources.ETag}`
             video!.src = getBaseUrl() + `/Videos/${sources.Id}/stream.${sources.Container}?` + param

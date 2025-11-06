@@ -312,18 +312,19 @@ export const letters = [
 ]
 
 export const DeviceProfile = {
+  // chatgpt
   DirectPlayProfiles: [
     {
-      AudioCodec: 'opus',
+      AudioCodec: 'vorbis,opus',
       Container: 'webm',
       Type: 'Video',
       VideoCodec: 'vp8,vp9,av1',
     },
     {
-      AudioCodec: 'aac,mp3,opus',
-      Container: 'mp4',
+      AudioCodec: 'aac,mp3',
+      Container: 'mp4, m4v',
       Type: 'Video',
-      VideoCodec: 'h264,vp9,av1',
+      VideoCodec: 'h264',
     },
   ],
   MaxStaticBitrate: 100000000,

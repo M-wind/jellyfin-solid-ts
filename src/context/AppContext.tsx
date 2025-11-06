@@ -66,7 +66,7 @@ export const AppProvider = (props: { children: JSX.Element }) => {
       })
     }
     const lang = localStorage.getItem('lang')
-    if (!!lang) updateState('lang', lang)
+    if (lang) updateState('lang', lang)
   })
 
   createEffect(
@@ -112,6 +112,6 @@ export const AppProvider = (props: { children: JSX.Element }) => {
 
 export const useAppContext = () => {
   const context = useContext(AppContext)
-  if (context == undefined) throw 'useAppContext: cannot find a AppContext'
+  if (context === undefined) throw 'useAppContext: cannot find a AppContext'
   return context
 }

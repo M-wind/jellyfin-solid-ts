@@ -1,5 +1,5 @@
 import { getBaseUrl } from '../api'
-import { ContainerCodec } from '../option'
+// import { ContainerCodec } from '../option'
 
 export const initAuth = (deviceId: string, version: string) => {
   const device = uaMatch(navigator.userAgent).browser
@@ -240,72 +240,72 @@ export const uaMatch = (ua: string) => {
   }
 }
 
-export const getDevicesProfile = () => {
-  const DevicesProfile: DevicesProfile = {
-    MaxStreamingBitrate: 120000000,
-    MaxStaticBitrate: 100000000,
-    MusicStreamingTranscodingBitrate: 384000,
-    SubtitleProfiles: [
-      {
-        Format: 'vtt',
-        Method: 'External',
-      },
-      {
-        Format: 'ass',
-        Method: 'External',
-      },
-      {
-        Format: 'ssa',
-        Method: 'External',
-      },
-    ],
-    ResponseProfiles: [
-      {
-        Type: 'Video',
-        Container: 'mp4',
-        MimeType: 'video/mp4',
-      },
-    ],
-  }
-
-  const directProfile = ContainerCodec.reduce<{ [index: string]: DirectPlayProfile }>((pre, cur) => {
-    if (MediaSource.isTypeSupported(cur.codec)) {
-      pre[cur.container] = {
-        Container: cur.container,
-        Type: 'Video',
-        VideoCodec: pre[cur.container]?.VideoCodec ?? '',
-        AudioCodec: pre[cur.container]?.AudioCodec ?? '',
-      }
-      if (cur.type === 'Video') {
-        pre[cur.container].VideoCodec =
-          pre[cur.container].VideoCodec === ''
-            ? cur.name
-            : pre[cur.container].VideoCodec + ',' + cur.name
-      } else {
-        pre[cur.container].AudioCodec =
-          pre[cur.container].AudioCodec === ''
-            ? cur.name
-            : pre[cur.container].AudioCodec + ',' + cur.name
-      }
-    }
-    return pre
-  }, {})
-
-  DevicesProfile.DirectPlayProfiles = Object.values(directProfile)
-  if (window.MediaSource) {
-    DevicesProfile.TranscodingProfiles = [
-      {
-        Container: 'ts',
-        Type: 'Video',
-        AudioCodec: 'aac',
-        VideoCodec: 'h264',
-        Context: 'Streaming',
-        Protocol: 'hls',
-        MaxAudioChannels: '2',
-        MinSegments: '1',
-        BreakOnNonKeyFrames: true,
-      },
-    ]
-  }
-  return DevicesProfile
-}
+// export const getDevicesProfile = () => {
+//   const DevicesProfile: DevicesProfile = {
+//     MaxStreamingBitrate: 120000000,
+//     MaxStaticBitrate: 100000000,
+//     MusicStreamingTranscodingBitrate: 384000,
+//     SubtitleProfiles: [
+//       {
+//         Format: 'vtt',
+//         Method: 'External',
+//       },
+//       {
+//         Format: 'ass',
+//         Method: 'External',
+//       },
+//       {
+//         Format: 'ssa',
+//         Method: 'External',
+//       },
+//     ],
+//     ResponseProfiles: [
+//       {
+//         Type: 'Video',
+//         Container: 'mp4',
+//         MimeType: 'video/mp4',
+//       },
+//     ],
+//   }
+//
+//   const directProfile = ContainerCodec.reduce<{ [index: string]: DirectPlayProfile }>((pre, cur) => {
+//     if (MediaSource.isTypeSupported(cur.codec)) {
+//       pre[cur.container] = {
+//         Container: cur.container,
+//         Type: 'Video',
+//         VideoCodec: pre[cur.container]?.VideoCodec ?? '',
+//         AudioCodec: pre[cur.container]?.AudioCodec ?? '',
+//       }
+//       if (cur.type === 'Video') {
+//         pre[cur.container].VideoCodec =
+//           pre[cur.container].VideoCodec === ''
+//             ? cur.name
+//             : pre[cur.container].VideoCodec + ',' + cur.name
+//       } else {
+//         pre[cur.container].AudioCodec =
+//           pre[cur.container].AudioCodec === ''
+//             ? cur.name
+//             : pre[cur.container].AudioCodec + ',' + cur.name
+//       }
+//     }
+//     return pre
+//   }, {})
+//
+//   DevicesProfile.DirectPlayProfiles = Object.values(directProfile)
+//   if (window.MediaSource) {
+//     DevicesProfile.TranscodingProfiles = [
+//       {
+//         Container: 'ts',
+//         Type: 'Video',
+//         AudioCodec: 'aac',
+//         VideoCodec: 'h264',
+//         Context: 'Streaming',
+//         Protocol: 'hls',
+//         MaxAudioChannels: '2',
+//         MinSegments: '1',
+//         BreakOnNonKeyFrames: true,
+//       },
+//     ]
+//   }
+//   return DevicesProfile
+// }
