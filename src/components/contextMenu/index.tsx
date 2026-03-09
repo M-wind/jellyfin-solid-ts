@@ -6,33 +6,32 @@ type MenuProps = {
   children: JSX.Element
 }
 
-type ItemProps = {
-  onClick?: (data: any, id?: string) => void
+type ItemProps<T> = {
+  onClick?: (id?: string, data?: T) => void
   id?: string
   disabled?: boolean
   class?: string
   children?: JSX.Element
 }
 
-type MenuState = {
+type MenuState<T> = {
   position: {
     x: number
     y: number
   }
   visible: boolean
-  data: any
+  data?: T
   id: string
 }
 
-const useContextMenu = () => {
-  const state = createMutable<MenuState>({
+const useContextMenu = <T,>() => {
+  const state = createMutable<MenuState<T>>({
     position: { x: 0, y: 0 },
     visible: false,
-    data: {},
     id: '',
   })
 
-  const show = <T,>(e: MouseEvent, id: string, val?: T) => {
+  const show = (e: MouseEvent, id: string, val?: T) => {
     batch(() => {
       state.id = id
       state.visible = true
@@ -54,7 +53,7 @@ const useContextMenu = () => {
     <Show when={state.visible && state.id === props.menuId}>
       <div
         id={props.menuId}
-        class='absolute z-50 py-1 rounded-md border-component-separator bg-component min-w-48'
+        class='fixed z-50 py-1 rounded-md border-component-separator bg-component min-w-48'
         style={{
           top: `${state.position.y}px`,
           left: `${state.position.x}px`,
@@ -67,7 +66,7 @@ const useContextMenu = () => {
     </Show>
   )
 
-  const Item = (props: ItemProps) => (
+  const Item = (props: ItemProps<T>) => (
     <div
       id={props.id}
       class={`flex h-10 cursor-pointer flex-row hover:bg-component-hover items-center gap-3 pl-3 ${
@@ -78,7 +77,7 @@ const useContextMenu = () => {
           e.preventDefault()
           e.stopPropagation()
           hide()
-          props.onClick(state.data, props.id)
+          props.onClick(props.id, state.data)
         }
       }}
     >

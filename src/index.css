@@ -11,7 +11,7 @@
   --color-highlight: var(--highlight);
   --color-indicator: var(--indicator);
 
-  --color-nomal: oklch(92.45% 0.0017 247.84);
+  --color-normal: oklch(92.45% 0.0017 247.84);
   --color-secondary: oklch(84.52% 0 0);
 
   --color-component: oklch(24.79% 0.0058 271.18);
@@ -41,7 +41,7 @@
 
   --shadow-half: 0 -30vh 30vh #000000 inset;
   --shadow-edge: 0 -40vh 15vh #171717 inset;
-  --shadow-play: 0 -20vh 20vh #000000c5 inset, 0 20vh 20vh #000000c5 inset;
+  --shadow-play: 0 -20vh 20vh #000000C5 inset, 0 20vh 20vh #000000C5 inset;
 
   --aspect-primary: 2 / 3;
   --aspect-backdrop: 16 / 9;
@@ -97,11 +97,13 @@
 }
 
 @utility angle-up {
-  @apply h-0 w-0 border-b-[12px] border-l-[6px] border-r-[6px] border-l-transparent border-r-transparent border-b-component;
+  @apply h-0 w-0 border-b-[12px] border-l-[6px] border-r-[6px] border-l-transparent border-r-transparent
+    border-b-component;
 }
 
 @utility angle-down {
-  @apply h-0 w-0 border-l-[6px] border-r-[6px] border-t-[12px] border-l-transparent border-r-transparent border-t-component;
+  @apply h-0 w-0 border-l-[6px] border-r-[6px] border-t-[12px] border-l-transparent border-r-transparent
+    border-t-component;
 }
 
 @utility text-screen-title {

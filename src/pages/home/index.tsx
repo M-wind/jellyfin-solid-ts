@@ -104,7 +104,7 @@ const Home = () => {
               type='button'
               onBlur={() => setFlag(false)}
               onClick={() => setFlag(!flag())}
-              class={`h-17 rounded-full cursor-pointer flex animate-zoomIn items-center text-nomal px-8 gap-4 ${
+              class={`h-17 rounded-full cursor-pointer flex animate-zoomIn items-center text-normal px-8 gap-4 ${
                 flag() ? 'bg-component' : 'bg-from-to'
               } `}
             >

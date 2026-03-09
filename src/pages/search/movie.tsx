@@ -59,12 +59,12 @@ const Movie = (props: MovieProps) => {
           <Show when={carouselOption.scroll}>
             <button onClick={() => scroll(0)} title='' disabled={carouselOption.prev} class='prev-next'>
               <FaSolidAngleLeft
-                class={`${carouselOption.prev ? 'text-nomal/50' : ''} text-screen-main`}
+                class={`${carouselOption.prev ? 'text-normal/50' : ''} text-screen-main`}
               />
             </button>
             <button onClick={() => scroll(1)} title='' disabled={carouselOption.next} class='prev-next'>
               <FaSolidAngleRight
-                class={`${carouselOption.next ? 'text-nomal/50' : ''} text-screen-main`}
+                class={`${carouselOption.next ? 'text-normal/50' : ''} text-screen-main`}
               />
             </button>
           </Show>

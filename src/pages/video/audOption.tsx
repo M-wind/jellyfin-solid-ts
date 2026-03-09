@@ -14,7 +14,7 @@ const AudioOption = (props: AudOptionProps) => {
   return (
     <>
       <div class='absolute angle-down bottom-video-osd left-angle-center' />
-      <div class='absolute right-0 z-50 flex-col mb-4 rounded-xl shadow-l bg-component bottom-video-osd -mr-[4.5rem] w-[28rem] animate-fadeIn text-nomal/80'>
+      <div class='absolute right-0 z-50 flex-col mb-4 rounded-xl shadow-l bg-component bottom-video-osd -mr-[4.5rem] w-[28rem] animate-fadeIn text-normal/80'>
         <div class='flex flex-row justify-between items-center px-6 h-14 select-none'>
           <div class='text-2xl font-medium'>{t('Audio')}</div>
           <SiJellyfin class='text-2xl text-primary' />
@@ -22,7 +22,7 @@ const AudioOption = (props: AudOptionProps) => {
         <div class='overflow-y-auto pb-3 max-h-96 scrollbar-0'>
           <For each={props.data}>
             {(item) => (
-              <div class='flex flex-row gap-6 items-center pr-4 pl-6 w-full h-14 text-xl font-medium cursor-pointer select-none hover:bg-from-to hover:text-nomal'>
+              <div class='flex flex-row gap-6 items-center pr-4 pl-6 w-full h-14 text-xl font-medium cursor-pointer select-none hover:bg-from-to hover:text-normal'>
                 <div class='flex items-center w-52 h-full'>
                   <p class='w-full truncate'>
                     {item.Language.toUpperCase() +

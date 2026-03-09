@@ -313,7 +313,7 @@ const Title = () => {
           <Show when={carouselOption.scroll}>
             <button class='prev-next' onClick={() => scrollT(0)} title='' disabled={carouselOption.prev}>
               <FaSolidAngleLeft
-                class={`${carouselOption.prev ? 'text-nomal/50' : ''} text-screen-main`}
+                class={`${carouselOption.prev ? 'text-normal/50' : ''} text-screen-main`}
               />
             </button>
           </Show>
@@ -322,7 +322,7 @@ const Title = () => {
           <Show when={carouselOption.scroll}>
             <button class='prev-next' onClick={() => scrollT(1)} title='' disabled={carouselOption.next}>
               <FaSolidAngleRight
-                class={`${carouselOption.next ? 'text-nomal/50' : ''} text-screen-main`}
+                class={`${carouselOption.next ? 'text-normal/50' : ''} text-screen-main`}
               />
             </button>
           </Show>
@@ -337,7 +337,7 @@ const Title = () => {
                     setCur(carouselOption.cur)
                   }}
                   disabled={!isMatch(item())}
-                  class='cursor-pointer disabled:cursor-default hover:text-primary disabled:text-nomal/50'
+                  class='cursor-pointer disabled:cursor-default hover:text-primary disabled:text-normal/50'
                 >
                   {item()}
                 </button>

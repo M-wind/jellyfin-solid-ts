@@ -28,7 +28,7 @@ const VideoOption = (props: VideoOptionProps) => {
   return (
     <>
       <div class='absolute angle-down bottom-video-osd left-angle-center' />
-      <div class='absolute right-0 z-50 flex-col mb-4 rounded-xl shadow-l bg-component bottom-video-osd -mr-[4.5rem] w-[28rem] animate-fadeIn text-nomal/80'>
+      <div class='absolute right-0 z-50 flex-col mb-4 rounded-xl shadow-l bg-component bottom-video-osd -mr-[4.5rem] w-[28rem] animate-fadeIn text-normal/80'>
         <div class='flex flex-row justify-between items-center px-6 h-14 select-none'>
           <div class='text-2xl font-medium'>{t('Video')}</div>
           <SiJellyfin class='text-2xl text-primary' />

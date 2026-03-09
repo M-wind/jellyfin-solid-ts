@@ -267,7 +267,7 @@ const Episode = () => {
           <For each={episode().Items[option.s]}>
             {(item, i) => (
               <div
-                class={`hover:bg-primary ${matchEpisode(i()) ? 'bg-primary ring-8 ring-primary' : 'text-nomal/50'} relative h-full shrink-0 rounded-xl bg-component-separator duration-300 ease-linear`}
+                class={`hover:bg-primary ${matchEpisode(i()) ? 'bg-primary ring-8 ring-primary' : 'text-normal/50'} relative h-full shrink-0 rounded-xl bg-component-separator duration-300 ease-linear`}
                 onMouseEnter={() => {
                   if (i() === option.e) return
                   setOption('e', i())
@@ -312,7 +312,7 @@ const Episode = () => {
           <Show when={carouselOption.scroll}>
             <button class='prev-next' onClick={() => scrollT(0)} title='' disabled={carouselOption.prev}>
               <FaSolidAngleLeft
-                class={`${carouselOption.prev ? 'text-nomal/50' : ''} text-screen-main`}
+                class={`${carouselOption.prev ? 'text-normal/50' : ''} text-screen-main`}
               />
             </button>
           </Show>
@@ -321,7 +321,7 @@ const Episode = () => {
           <Show when={carouselOption.scroll}>
             <button class='prev-next' onClick={() => scrollT(1)} title='' disabled={carouselOption.next}>
               <FaSolidAngleRight
-                class={`${carouselOption.next ? 'text-nomal/50' : ''} text-screen-main`}
+                class={`${carouselOption.next ? 'text-normal/50' : ''} text-screen-main`}
               />
             </button>
           </Show>
@@ -370,7 +370,7 @@ const ScrollerSeason = (props: ScrollerSeaonProps) => {
               onclick={() => {
                 if (props.onClick) props.onClick(item())
               }}
-              class={`${matchSeason(item()) ? 'bg-from-to' : 'text-nomal/50'} hover:text-nomal hover:bg-from-to disable-default h-16 max-3xl:h-14 max-2xl:h12 w-36 shrink-0 rounded-xl bg-component-separator cursor-pointer text-2xl max-3xl:text-xl font-semibold duration-300 ease-linear`}
+              class={`${matchSeason(item()) ? 'bg-from-to' : 'text-normal/50'} hover:text-normal hover:bg-from-to disable-default h-16 max-3xl:h-14 max-2xl:h12 w-36 shrink-0 rounded-xl bg-component-separator cursor-pointer text-2xl max-3xl:text-xl font-semibold duration-300 ease-linear`}
             >
               {label + item()}
             </button>
