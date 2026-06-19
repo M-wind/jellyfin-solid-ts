@@ -240,10 +240,10 @@ const Home = () => {
   })
 
   onMount(() => {
-    if (imgs && imgs?.childNodes.length > 0) {
+    if (imgs && imgs?.childNodes.length > 1) {
       resizeObserver.observe(imgs)
+      timer = setInterval(() => scrollT(1), 15000)
     }
-    timer = setInterval(() => scrollT(1), 15000)
   })
 
   return (
@@ -268,18 +268,22 @@ const Home = () => {
           <IoSearch class='text-2xl duration-200 ease-in hover:text-primary' onClick={goSearch} />
         </div>
       </div>
-      <div class='flex absolute top-0 left-0 z-20 justify-center items-center h-full opacity-0 duration-500 ease-linear hover:opacity-100 w-1/20'>
-        <FaSolidAngleLeft
-          class='cursor-pointer text-screen-title text-primary'
-          onClick={() => scrollT(Direction.LEFT)}
-        />
-      </div>
-      <div class='flex absolute top-0 right-0 z-20 justify-center items-center h-full opacity-0 duration-500 ease-linear hover:opacity-100 w-1/20'>
-        <FaSolidAngleRight
-          class='cursor-pointer text-screen-title text-primary'
-          onClick={() => scrollT(Direction.RIGHT)}
-        />
-      </div>
+      <Show
+        when={media.type === 'Movie' ? movies().TotalRecordCount > 1 : series().TotalRecordCount > 1}
+      >
+        <div class='flex absolute top-0 left-0 z-20 justify-center items-center h-full opacity-0 duration-500 ease-linear hover:opacity-100 w-1/20'>
+          <FaSolidAngleLeft
+            class='cursor-pointer text-screen-title text-primary'
+            onClick={() => scrollT(Direction.LEFT)}
+          />
+        </div>
+        <div class='flex absolute top-0 right-0 z-20 justify-center items-center h-full opacity-0 duration-500 ease-linear hover:opacity-100 w-1/20'>
+          <FaSolidAngleRight
+            class='cursor-pointer text-screen-title text-primary'
+            onClick={() => scrollT(Direction.RIGHT)}
+          />
+        </div>
+      </Show>
       <div class='absolute left-[5%] top-[38%] h-[62%] w-9/10 flex flex-col gap-6 z-10 [@media(max-height:20rem)]:hidden'>
         <BaseInfo
           val={
