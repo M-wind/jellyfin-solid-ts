@@ -82,7 +82,7 @@ const Detail = () => {
   const urlIcon: {
     [index: string]: JSX.Element
   } = {
-    TheMovieDb: <SiThemoviedatabase class='text-2xl' />,
+    TMDB: <SiThemoviedatabase class='text-2xl' />,
     IMDb: <SiImdb class='text-2xl' />,
     Trakt: <SiTrakt class='text-2xl' />,
   }
@@ -199,7 +199,7 @@ const Detail = () => {
             </div>
             <div class='flex flex-col gap-4 w-full h-5/6'>
               <p class='min-2xl:text-lg max-3xl:line-clamp-2 shrink-0 text-secondary'>
-                &emsp;&emsp;{item.Overview.trim() ?? ''}
+                &emsp;&emsp;{item.Overview?.trim() ?? ''}
               </p>
               <div class='flex gap-4 w-full h-6 text-primary'>
                 <For each={item.ExternalUrls}>

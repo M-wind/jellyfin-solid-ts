@@ -39,7 +39,7 @@ const BaseInfo = (props: BaseInfoProps) => {
         </Show>
       </div>
       <p class='text-screen-clamp text-screen-overview text-secondary'>
-        {<p>&emsp;&emsp;{props.val?.Overview.trim() ?? ''}</p>}
+        {<p>&emsp;&emsp;{props.val?.Overview?.trim() ?? ''}</p>}
       </p>
     </div>
   )
@@ -74,7 +74,7 @@ const BaseInfoEpisode = (props: BaseInfoProps) => {
       </div>
       <p class='text-screen-clamp text-screen-overview text-secondary'>
         <strong>{props.val?.Name.trim() ?? ''}</strong>
-        {` ~ ${props.val?.Overview.trim() ?? ''}`}
+        {` ~ ${props.val?.Overview?.trim() ?? ''}`}
       </p>
     </div>
   )
@@ -110,7 +110,7 @@ const BaseInfoActor = (props: BaseInfoProps) => {
       </Show>
       <Show when={props.val?.Overview}>
         <p class='text-screen-clamp text-screen-overview text-secondary'>
-          &emsp;&emsp;{props.val?.Overview.trim()}
+          &emsp;&emsp;{props.val?.Overview?.trim()}
         </p>
       </Show>
     </div>

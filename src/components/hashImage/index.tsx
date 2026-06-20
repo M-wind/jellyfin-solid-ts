@@ -11,15 +11,18 @@ type HashImageProps = {
 
 const HashImage = (props: HashImageProps) => {
   const getHashImage = () => {
-    const width = 5
-    const height = 5
+    const width = 6
+    const height = 6
     const pixels = decodeBlurHash(props.hash, width, height)
-    const ctx = canvas?.getContext('2d')!
-    canvas!.width = 5
-    canvas!.height = 5
+    let canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')!
+    canvas.width = width
+    canvas.height = height
     const imageData = ctx.createImageData(width, height)
     imageData.data.set(pixels)
     ctx.putImageData(imageData, 0, 0)
+    let baseimg = canvas.toDataURL('image/png')
+    div!.style.backgroundImage = `url(${baseimg})`
   }
 
   const [hide, setHide] = createSignal('')
@@ -28,7 +31,6 @@ const HashImage = (props: HashImageProps) => {
     // canvas: true,
   })
 
-  let canvas: HTMLCanvasElement | undefined
   let div: HTMLDivElement | undefined
 
   const o = new IntersectionObserver(
@@ -46,7 +48,7 @@ const HashImage = (props: HashImageProps) => {
   )
 
   onMount(() => {
-    if (canvas) o.observe(canvas)
+    if (div) o.observe(div)
   })
 
   onCleanup(() => o.disconnect())
@@ -54,7 +56,6 @@ const HashImage = (props: HashImageProps) => {
   return (
     <div
       class={`${props.class} relative shrink-0`}
-      ref={div}
       onClick={() => {
         if (props.onClick) props.onClick()
       }}
@@ -68,13 +69,13 @@ const HashImage = (props: HashImageProps) => {
           tabIndex={-1}
         />
       </Show>
-      <canvas
-        ref={canvas}
-        class={`absolute ${props.class} h-full ${hide()} duration-500 ease-linear left-0 top-0`}
+      <div
+        ref={div}
+        class={`absolute ${props.class} h-full bg-center bg-cover ${hide()} duration-500 ease-linear left-0 top-0`}
         // onTransitionEnd={() => {
         //   if (props.url) setOpen('canvas', false)
         // }}
-      ></canvas>
+      ></div>
     </div>
   )
 }

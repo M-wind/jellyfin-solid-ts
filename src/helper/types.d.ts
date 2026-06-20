@@ -250,7 +250,7 @@ interface MediaInfo {
   ProductionYear?: number
   IsFolder: boolean
   Type: MediaType | SeriesOption
-  Overview: string
+  Overview?: string
   Genres: Genres[]
   ImageBlurHashes?: ImageBlurHashes
   ImageTags: ImageTags
