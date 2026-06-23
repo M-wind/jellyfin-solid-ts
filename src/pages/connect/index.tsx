@@ -9,8 +9,8 @@ const Connect = () => {
 
   onMount(async () => {
     try {
-      // const address = 'http://localhost:8096'
-      const address = window.location.origin
+      const address = 'http://192.168.1.1:8096'
+      // const address = window.location.origin
       const data = await getSystemInfoPublic(address)
       const token = initAuth(state.uuid, data.Version)
       initConfig(data.LocalAddress, token)

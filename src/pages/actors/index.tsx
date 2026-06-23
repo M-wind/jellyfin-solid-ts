@@ -11,6 +11,7 @@ import {
   createSignal,
   on,
   onCleanup,
+  onMount,
 } from 'solid-js'
 import { createStore } from 'solid-js/store'
 import CarouselWrapper from '../../components/carousel'
@@ -21,7 +22,11 @@ import { letters } from '../../helper/option'
 import { getPeopleImageUrl } from '../../helper/utils'
 import Avatar from '../avatar'
 import Back from '../back'
+// import { tempMockActors } from '../../Mock'
 import { BaseInfoActor } from '../base/info'
+import Searchs from '../../components/search'
+import { IoSearch } from 'solid-icons/io'
+import { createAutoAnimate } from '@formkit/auto-animate/solid'
 
 interface MediaInfoDetailLetter extends MediaInfoDetail {
   Letter: string
@@ -37,13 +42,27 @@ const Actors = () => {
   const param = state.pages[state.pages.length - 1].param
   const mediaType: MediaType = param?.type
 
+  const [actorsD, setActorsD] = createStore<{
+    Items: MediaInfoDetailLetter[]
+    StartIndex: number
+    TotalRecordCount: number
+  }>({
+    Items: [],
+    StartIndex: 0,
+    TotalRecordCount: 0,
+  })
+
+  const [searchP, setSearchP] = createSignal(param?.searchP || '')
+
   const fetcher = async () => {
     const data = await getAllPersons(state.userId)
+    // const data = await tempMockActors()
     const d = {
       Items: sortByLetter(data.Items),
       StartIndex: 0,
       TotalRecordCount: data.Items.length,
     }
+    setActorsD(d)
     return d
   }
 
@@ -107,7 +126,7 @@ const Actors = () => {
         type: mediaType,
         option: {
           PersonIds: actors().Items[v].Id,
-          IncludeItemTypes: 'Movie,Series',
+          IncludeItemTypes: 'Movie,Series,Episode',
         },
       },
     })
@@ -118,6 +137,7 @@ const Actors = () => {
     updateState('pages', (k) => k.id === 'Actors', 'param', {
       ...param,
       cur: cur(),
+      searchP: searchP(),
     })
   })
 
@@ -151,14 +171,70 @@ const Actors = () => {
       })
   }
 
+  onMount(() => {
+    if (param?.searchP && param?.searchP !== '') {
+      onSearch(param?.searchP)
+      setCur(param?.cur)
+    }
+  })
+
+  const onSearch = (v: string) => {
+    const needD: MediaInfoDetailLetter[] = []
+    let needL: Letters = {}
+    for (let d of actorsD.Items) {
+      if (v === '' || d.Name.toLowerCase().indexOf(v.toLowerCase()) !== -1) {
+        needD.push(d)
+        needL = { ...needL, [d.Letter]: d.Letter }
+      }
+    }
+    batch(() => {
+      setSearchP(v)
+      setCur(0)
+      setInLetters(needL)
+      mutate((k) => {
+        return { ...k, Items: needD }
+      })
+    })
+  }
+
+  const [searchOpen, setSearchOpen] = createSignal(false)
+
+  const [parent] = createAutoAnimate()
+
   return (
     <>
       <Back />
       <Avatar />
+      <div
+        ref={parent}
+        class='flex flex-col absolute left-[5%] top-12 w-9/10 gap-4 items-center h-24 max-md:top-32'
+      >
+        <Show
+          when={searchOpen()}
+          fallback={
+            <div class='flex justify-end items-center w-full cursor-pointer h-17'>
+              <IoSearch
+                class='mr-20 text-2xl duration-200 ease-in hover:text-primary'
+                onClick={() => setSearchOpen(true)}
+              />
+            </div>
+          }
+        >
+          <Searchs
+            w='w-full min-xl:w-[50%] min-lg:w-[55%] min-md:w-[60%]'
+            value={searchP()}
+            onClick={onSearch}
+            onBlur={(v) => setSearchOpen(v)}
+          />
+        </Show>
+      </div>
       <div class='absolute top-[20%] h-[37%] left-[5%] w-9/10'>
         <BaseInfoActor val={actors().Items[cur()]} />
       </div>
-      <Carousel class='fixed top-[57%] h-[31%] animate-fadeIn left-[5%] w-9/10 [@media(max-height:18rem)]:hidden flex overflow-x-auto  flex-row gap-8 py-2 px-2 scrollbar-none disable-select'>
+      <Carousel
+        length={actors().Items.length}
+        class='fixed top-[57%] h-[31%] animate-fadeIn left-[5%] w-9/10 [@media(max-height:18rem)]:hidden flex overflow-x-auto  flex-row gap-8 py-2 px-2 scrollbar-none disable-select'
+      >
         <For each={actors().Items}>
           {(v, i) => (
             <div
@@ -199,6 +275,7 @@ const Actors = () => {
           )}
         </For>
       </Carousel>
+
       <div class='absolute top-[57%] h-[31%] flex justify-center left-0 w-[5%]'>
         <Show when={carouselOption.scroll}>
           <button
@@ -207,7 +284,9 @@ const Actors = () => {
             onClick={() => scrollT(0)}
             disabled={carouselOption.prev}
           >
-            <FaSolidAngleLeft class={`${carouselOption.prev ? 'text-normal/50' : ''} text-screen-main`} />
+            <FaSolidAngleLeft
+              class={`${carouselOption.prev ? 'text-normal/50' : ''} text-screen-main`}
+            />
           </button>
         </Show>
       </div>

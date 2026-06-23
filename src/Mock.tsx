@@ -26,15 +26,15 @@ const ImageTags = [
   { Primary: undefined },
   { Primary: undefined },
   { Primary: undefined },
-  { Primary: undefined },
-  { Primary: undefined },
-  { Primary: undefined },
-  { Primary: 'ef92331ffab2a5fe363faf29285a103e' },
-  { Primary: 'd5a51fef55a965fbae20c7c1dd61fa2e' },
-  { Primary: '0842199b64a8ad0b5864f00d042ac19d' },
-  { Primary: '12685aea553302db550ec86abc262966' },
-  { Primary: '6d097c5cfe9c2f55cc89ce5390e5dc60' },
-  { Primary: 'c56674c4c7a449ba96cccb68cb8282a5' },
+  { Primary: 'a7247317f4b6bf593cfa3abfb2b17723' },
+  { Primary: '6d0478fccc9c1b3124701770ca8d7813' },
+  { Primary: '50efc0b64eb361b01e44537288b42a92' },
+  { Primary: '80915e8357490ae85f2919586733c5c3' },
+  { Primary: '8ccbbe45c575d1f70496dd3c42f67663' },
+  { Primary: 'dd2d275a53cc7745c85e1300031b5a5c' },
+  { Primary: '868bdfe013d42a6db21fc69235cb1154' },
+  { Primary: '2c1bec70986d3d88a7454080da097977' },
+  { Primary: '40b77ef549b37422a4552fe06dcd24fe' },
 ]
 
 const BackdropImageTags = [
@@ -92,6 +92,10 @@ Random.extend({
   ImageBlurHashes: function () {
     return this.pick(ImageBLurHashes)
   },
+  Names: function () {
+    const names = [Random.cname(), Random.name()]
+    return this.pick(names)
+  },
 })
 Random.Ids()
 Random.Overviews()
@@ -101,6 +105,7 @@ Random.Titles()
 Random.ImageTags()
 Random.BackdropImageTags()
 Random.ImageBlurHashes()
+Random.Names()
 
 const MockData = Mock.mock({
   'Items|7000-7200': [
@@ -130,10 +135,32 @@ const MockData = Mock.mock({
   ],
 })
 
+const MockActors = Mock.mock({
+  'Items|10000-12000': [
+    {
+      // Name: '@NAMES',
+      Name: '吉姆·卡维泽',
+      ServerId: '6e9a7293f38f4b84868e30c476372c6e',
+      Id: '@IDS',
+      ExternalUrls: [],
+      Type: 'Person',
+      // ImageTags: '@IMAGETAGS',
+      ImageTags: {
+        Primary: '2c1bec70986d3d88a7454080da097977',
+      },
+    },
+  ],
+})
+
 const tempMockData = (mockData = MockData, delay = 100): any => {
   return new Promise((resolve) => {
     setTimeout(() => resolve(mockData), delay)
   })
 }
 
-export default tempMockData
+const tempMockActors = (mockData = MockActors, delay = 10): any => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(mockData), delay)
+  })
+}
+export { tempMockData, tempMockActors }

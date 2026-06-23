@@ -1,4 +1,4 @@
-import { type JSX, batch, onCleanup, onMount } from 'solid-js'
+import { type JSX, batch, createEffect, createMemo, on, onCleanup } from 'solid-js'
 import { createStore } from 'solid-js/store'
 
 type Options = {
@@ -136,7 +136,7 @@ const CarouselWrapper = (props?: CarouselWrapperArgs) => {
     disable()
   }
 
-  const Carousel = (props: { children: JSX.Element; class: string }) => {
+  const Carousel = (props: { children: JSX.Element; class: string; length?: number }) => {
     onCleanup(() => {
       // clearTimeout(timer)
       resizeObserver.disconnect()
@@ -146,15 +146,26 @@ const CarouselWrapper = (props?: CarouselWrapperArgs) => {
       // clearTimeout(timer)
       // timer = setTimeout(needScroll, 100)
       needScroll()
-      if (carouselOption.cur !== 0) {
-        // setTimeout(() => scrollToPosition(carouselOption.cur), 500)
-        scrollToPosition(carouselOption.cur)
-      }
+      // if (carouselOption.cur !== 0) {
+      // setTimeout(() => scrollToPosition(carouselOption.cur), 500)
+      scrollToPosition(carouselOption.cur)
+      // }
     })
 
-    onMount(() => {
-      if (imgs) resizeObserver.observe(imgs)
-    })
+    // onMount(() => {
+    //   if (imgs) resizeObserver.observe(imgs)
+    // })
+
+    createEffect(
+      on(
+        createMemo(() => props.length),
+        () => {
+          resizeObserver.disconnect()
+          setOption('cur', 0)
+          if (imgs) resizeObserver.observe(imgs)
+        },
+      ),
+    )
 
     return (
       <div class={props.class} ref={imgs}>

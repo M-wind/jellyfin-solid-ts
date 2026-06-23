@@ -39,7 +39,10 @@ const Movie = (props: MovieProps) => {
         <div class='text-2xl font-semibold leading-normal text-primary'>{props.items.length}</div>
       </div>
       <div class='flex flex-row w-full h-[21rem]'>
-        <Carousel class='flex absolute left-[5%] overflow-x-auto flex-row gap-8 py-2 px-2 w-9/10 scrollbar-none disable-select'>
+        <Carousel
+          length={props.items.length}
+          class='flex absolute left-[5%] overflow-x-auto flex-row gap-8 py-2 px-2 w-9/10 scrollbar-none disable-select'
+        >
           <For each={props.items}>
             {(v) => (
               <div class='flex relative flex-col gap-2 h-full shrink-0'>

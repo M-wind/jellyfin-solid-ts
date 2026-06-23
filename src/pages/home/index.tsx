@@ -22,6 +22,7 @@ import HashImage from '../../components/hashImage'
 import { getMediaSuggestions } from '../../helper/api'
 import { getBackDropImageUrl, getHash } from '../../helper/utils'
 import { BaseInfo } from '../base/info'
+import { createAutoAnimate } from '@formkit/auto-animate/solid'
 
 enum Direction {
   LEFT = 0,
@@ -246,10 +247,12 @@ const Home = () => {
     }
   })
 
+  const [parent] = createAutoAnimate()
+
   return (
     <>
       <Avatar />
-      <div class='absolute left-[5%] top-12 z-50 flex flex-row gap-8'>
+      <div ref={parent} class='absolute left-[5%] top-12 z-50 flex flex-row gap-8'>
         <TabItem
           open={movies().TotalRecordCount > 0}
           show={media.type === 'Movie'}

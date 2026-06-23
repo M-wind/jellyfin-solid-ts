@@ -40,7 +40,10 @@ const Search = () => {
     },
   )
 
+  const [searchP, setSearchP] = createSignal('')
+
   const onSearch = async (v: string) => {
+    if (v === '') return
     const types = option().reduce((pre, cur) => {
       if (cur.DefaultEnabled) pre = pre + cur.Name + ','
       return pre
@@ -59,6 +62,7 @@ const Search = () => {
         Person: { show: true, data: [], cur: 0 },
       },
     )
+    setSearchP(v)
     setSearchR(r)
   }
 
@@ -105,7 +109,7 @@ const Search = () => {
     const current = pages.pop()
     pages.push({
       id: 'Search',
-      param: { ...current?.param, data: searchR },
+      param: { ...current?.param, data: searchR, searchP: searchP() },
     })
     return pages
   }
@@ -121,7 +125,11 @@ const Search = () => {
       <Back />
       <Avatar />
       <div class='flex flex-col absolute left-[5%] top-12 w-9/10 gap-4 items-center h-24 max-md:top-32'>
-        <Searchs w='w-full min-xl:w-[50%] min-lg:w-[55%] min-md:w-[60%]' onClick={onSearch} />
+        <Searchs
+          w='w-full min-xl:w-[50%] min-lg:w-[55%] min-md:w-[60%]'
+          value={param?.param?.searchP}
+          onClick={onSearch}
+        />
         <div class='flex flex-row gap-6'>
           <For each={option()}>
             {(v) => (
