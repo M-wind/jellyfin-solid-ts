@@ -68,6 +68,7 @@ const Avatar = (props: AvatarProps) => {
           class='flex relative justify-center items-center w-14 h-14 rounded-full cursor-pointer bg-component hover:bg-from-to'
         >
           <FaSolidUser class='text-2xl' />
+          {/* <img src="http://192.168.1.1:8096/web/assets/img/avatar.png" class='h-14 rounded-full' /> */}
         </div>
         <MenuItem
           show={open()}

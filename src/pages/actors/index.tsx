@@ -25,8 +25,8 @@ import Back from '../back'
 // import { tempMockActors } from '../../Mock'
 import { BaseInfoActor } from '../base/info'
 import Searchs from '../../components/search'
-import { IoSearch } from 'solid-icons/io'
-import { createAutoAnimate } from '@formkit/auto-animate/solid'
+// import { IoSearch } from 'solid-icons/io'
+// import { createAutoAnimate } from '@formkit/auto-animate/solid'
 
 interface MediaInfoDetailLetter extends MediaInfoDetail {
   Letter: string
@@ -192,24 +192,24 @@ const Actors = () => {
       setCur(0)
       setInLetters(needL)
       mutate((k) => {
-        return { ...k, Items: needD }
+        return { ...k, Items: needD, TotalRecordCount: needD.length }
       })
     })
   }
 
-  const [searchOpen, setSearchOpen] = createSignal(false)
+  // const [searchOpen, setSearchOpen] = createSignal(false)
 
-  const [parent] = createAutoAnimate()
+  // const [parent] = createAutoAnimate()
 
   return (
     <>
       <Back />
       <Avatar />
       <div
-        ref={parent}
-        class='flex flex-col absolute left-[5%] top-12 w-9/10 gap-4 items-center h-24 max-md:top-32'
+        // ref={parent}
+        class='flex absolute top-12 flex-col gap-4 items-center h-24 left-calc-search right-[104px] max-md:top-32'
       >
-        <Show
+        {/* <Show
           when={searchOpen()}
           fallback={
             <div class='flex justify-end items-center w-full cursor-pointer h-17'>
@@ -219,14 +219,14 @@ const Actors = () => {
               />
             </div>
           }
-        >
-          <Searchs
-            w='w-full min-xl:w-[50%] min-lg:w-[55%] min-md:w-[60%]'
-            value={searchP()}
-            onClick={onSearch}
-            onBlur={(v) => setSearchOpen(v)}
-          />
-        </Show>
+        > */}
+        <Searchs
+          w='w-full min-xl:w-[50%] min-lg:w-[55%] min-md:w-[60%]'
+          value={searchP()}
+          onClick={onSearch}
+          // onBlur={(v) => setSearchOpen(v)}
+        />
+        {/* </Show> */}
       </div>
       <div class='absolute top-[20%] h-[37%] left-[5%] w-9/10'>
         <BaseInfoActor val={actors().Items[cur()]} />
@@ -236,7 +236,7 @@ const Actors = () => {
         class='fixed top-[57%] h-[31%] animate-fadeIn left-[5%] w-9/10 [@media(max-height:18rem)]:hidden flex overflow-x-auto  flex-row gap-8 py-2 px-2 scrollbar-none disable-select'
       >
         <For each={actors().Items}>
-          {(v, i) => (
+          {(item, i) => (
             <div
               class={`h-full relative shrink-0 cursor-pointer rounded-xl ${
                 isSelected(i()) ? 'ring-8 ring-primary' : ''
@@ -248,10 +248,10 @@ const Actors = () => {
               onClick={() => handleClick(i())}
             >
               <Show
-                when={v.ImageTags.Primary}
+                when={item.ImageTags.Primary}
                 fallback={
                   <div
-                    onContextMenu={() => getPersonDetail(v.Id, v.ExternalUrls)}
+                    onContextMenu={() => getPersonDetail(item.Id, item.ExternalUrls)}
                     class='flex justify-center items-center h-full @container rounded-xl bg-component aspect-people'
                   >
                     <FaSolidUser class='text-8xl @max-[14rem]:text-7xl @max-[12rem]:text-6xl @max-[10rem]:text-5xl @max-[8rem]:text-4xl' />
@@ -262,11 +262,11 @@ const Actors = () => {
                   alt=''
                   loading='lazy'
                   class='object-cover h-full rounded-xl brightness-[.8] aspect-people'
-                  src={getPeopleImageUrl(v.Name, v.ImageTags.Primary)}
-                  onContextMenu={() => getPersonDetail(v.Id, v.ExternalUrls)}
+                  src={getPeopleImageUrl(item.Name, item.ImageTags.Primary)}
+                  onContextMenu={() => getPersonDetail(item.Id, item.ExternalUrls)}
                 />
               </Show>
-              <Show when={personInfo.status === 'pending' && personInfo.id === v.Id}>
+              <Show when={personInfo.status === 'pending' && personInfo.id === item.Id}>
                 <div class='flex absolute top-0 left-0 justify-center items-center w-full h-full rounded-xl bg-black/50'>
                   <Loading class='w-1/5 h-1/5 animate-spin' />
                 </div>

@@ -582,6 +582,7 @@ type PersonSearchParam = {
   enableUserData?: boolean
   appearsInItemId?: string
   personTypes?: string
+  searchTerm?: string
 }
 
 type DirectPlayProfile = {

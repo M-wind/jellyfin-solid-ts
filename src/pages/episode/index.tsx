@@ -25,7 +25,6 @@ import { Items } from '../../components/menuItem'
 import { Toggle } from '../../components/toggle'
 import { orginalItems } from '../base/item'
 import Back from '../back'
-import { createAutoAnimate } from '@formkit/auto-animate/solid'
 
 type SeasonInfo = { [index: number]: MediaInfoDetail[] }
 

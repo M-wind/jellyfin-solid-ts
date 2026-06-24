@@ -47,7 +47,7 @@ const Episode = (props: EpisodeProps) => {
             {(v) => (
               <div class='flex relative flex-col gap-2 h-full shrink-0'>
                 <img
-                  class='h-56 rounded-xl duration-300 ease-linear cursor-pointer hover:ring-8 aspect-episode hover:ring-primary'
+                  class='h-56 rounded-xl duration-300 ease-linear cursor-pointer hover:ring-8 aspect-episode object-cover hover:ring-primary'
                   onClick={() => props.onClick(v.Id)}
                   src={getImageUrl(
                     v.Id,

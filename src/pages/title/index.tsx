@@ -13,6 +13,7 @@ import {
   createSignal,
   on,
   onCleanup,
+  onMount,
 } from 'solid-js'
 import CarouselWrapper from '../../components/carousel'
 import { Checked, CicleProgress } from '../../components/svg'
@@ -29,6 +30,7 @@ import HashImage from '../../components/hashImage'
 import { orginalItems } from '../base/item'
 import { Toggle } from '../../components/toggle'
 import { Items } from '../../components/menuItem'
+import Searchs from '../../components/search'
 
 interface MediaInfoDetailLetter extends MediaInfoDetail {
   Letter: string
@@ -56,6 +58,18 @@ const Title = () => {
   const mediaType: MediaType = param?.type
   const option: MediaItemOption = param?.option
 
+  const [titleD, setTitleD] = createStore<{
+    Items: MediaInfoDetailLetter[]
+    StartIndex: number
+    TotalRecordCount: number
+  }>({
+    Items: [],
+    StartIndex: 0,
+    TotalRecordCount: 0,
+  })
+
+  const [searchP, setSearchP] = createSignal(param?.searchP || '')
+
   const fetch = async () => {
     const data = await getMediaItemsByType(state.userId, mediaType, option)
     // const data = await tempMockData()
@@ -64,6 +78,7 @@ const Title = () => {
       StartIndex: 0,
       TotalRecordCount: data.Items.length,
     }
+    setTitleD(d)
     return d
   }
 
@@ -162,6 +177,7 @@ const Title = () => {
     updateState('pages', (k) => k.id === 'Title', 'param', {
       ...param,
       cur: cur(),
+      searchP: searchP(),
       filterOption,
     })
   })
@@ -250,6 +266,35 @@ const Title = () => {
     return getBackDropImageUrl(id, imgIds)
   }
 
+  onMount(() => {
+    if (param?.searchP && param?.searchP !== '') {
+      onSearch(param?.searchP)
+      setCur(param?.cur)
+    }
+  })
+
+  const onSearch = (v: string) => {
+    const needD: MediaInfoDetailLetter[] = []
+    let needL: Letters = {}
+    for (let d of titleD.Items) {
+      if (filterOption.unPlayed && d.UserData.Played) {
+        continue
+      }
+      if (v === '' || d.Name.toLowerCase().indexOf(v.toLowerCase()) !== -1) {
+        needD.push(d)
+        needL = { ...needL, [d.Letter]: d.Letter }
+      }
+    }
+    batch(() => {
+      setCur(0)
+      setSearchP(v)
+      setInLetters(needL)
+      mutate((k) => {
+        return { ...k, Items: needD, TotalRecordCount: needD.length }
+      })
+    })
+  }
+
   return (
     <>
       <Back />
@@ -257,6 +302,14 @@ const Title = () => {
       {/* {backgroud(
             getImageUrl(val()?.Items[cur()].Id!, val()?.Items[cur()].ImageBlurHashes!, 'Backdrop'),
           )} */}
+      <div class='flex absolute top-12 z-50 flex-col gap-4 items-center h-24 left-calc-search right-[104px] max-md:top-32'>
+        <Searchs
+          w='w-full min-xl:w-[50%] min-lg:w-[55%] min-md:w-[60%]'
+          value={searchP()}
+          onClick={onSearch}
+        />
+      </div>
+
       <Show when={title().TotalRecordCount > 0}>
         <img
           class='object-cover w-full h-full brightness-30'

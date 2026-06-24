@@ -83,7 +83,7 @@ const Video = () => {
     })
   }
 
-  const [playbackInfo, { refetch }] = createResource(() => item?.Id, fetcher)
+  const [playbackInfo, { refetch }] = createResource(item?.Id, fetcher)
 
   const [videoState, setVideoState] = createStore<VideoState>({
     playState: true,

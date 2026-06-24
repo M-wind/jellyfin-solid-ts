@@ -124,8 +124,9 @@ const Search = () => {
     <>
       <Back />
       <Avatar />
-      <div class='flex flex-col absolute left-[5%] top-12 w-9/10 gap-4 items-center h-24 max-md:top-32'>
+      <div class='flex flex-col absolute left-calc-search right-[104px] top-12 gap-4 items-center h-24 max-md:top-32'>
         <Searchs
+          autoFocus
           w='w-full min-xl:w-[50%] min-lg:w-[55%] min-md:w-[60%]'
           value={param?.param?.searchP}
           onClick={onSearch}

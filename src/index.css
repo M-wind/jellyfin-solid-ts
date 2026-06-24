@@ -37,6 +37,8 @@
   --spacing-video-osd: calc(100% + 2.5rem);
   --spacing-calc-3: calc(100% - 3rem);
 
+  --spacing-calc-search: calc(5% + 7rem);
+
   --font-ty: TypoGraphica;
 
   --shadow-half: 0 -30vh 30vh #000000 inset;

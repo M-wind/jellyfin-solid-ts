@@ -146,10 +146,10 @@ const CarouselWrapper = (props?: CarouselWrapperArgs) => {
       // clearTimeout(timer)
       // timer = setTimeout(needScroll, 100)
       needScroll()
-      // if (carouselOption.cur !== 0) {
-      // setTimeout(() => scrollToPosition(carouselOption.cur), 500)
-      scrollToPosition(carouselOption.cur)
-      // }
+      if (carouselOption.nodeInfo.length !== 0) {
+        // setTimeout(() => scrollToPosition(carouselOption.cur), 500)
+        scrollToPosition(carouselOption.cur)
+      }
     })
 
     // onMount(() => {
