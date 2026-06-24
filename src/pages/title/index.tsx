@@ -29,7 +29,6 @@ import HashImage from '../../components/hashImage'
 import { orginalItems } from '../base/item'
 import { Toggle } from '../../components/toggle'
 import { Items } from '../../components/menuItem'
-import { createAutoAnimate } from '@formkit/auto-animate/solid'
 
 interface MediaInfoDetailLetter extends MediaInfoDetail {
   Letter: string
@@ -251,25 +250,6 @@ const Title = () => {
     return getBackDropImageUrl(id, imgIds)
   }
 
-  const baseInfo = (data: MediaInfoDetailLetter) => <BaseInfo val={data} />
-
-  const [parent] = createAutoAnimate()
-  const [parent2] = createAutoAnimate()
-
-  const backDropImg = (data: MediaInfoDetailLetter) => (
-    <img
-      class='object-cover w-full h-full brightness-30'
-      src={
-        data.Type === 'Episode'
-          ? getBackDropImage(data.ParentBackdropItemId!, data.ParentBackdropImageTags!)
-          : getBackDropImage(data.Id, data.BackdropImageTags)
-      }
-      alt=''
-    />
-  )
-
-  const baseInfoEpisode = (data: MediaInfoDetailLetter) => <BaseInfoEpisode val={data} />
-
   return (
     <>
       <Back />
@@ -278,30 +258,25 @@ const Title = () => {
             getImageUrl(val()?.Items[cur()].Id!, val()?.Items[cur()].ImageBlurHashes!, 'Backdrop'),
           )} */}
       <Show when={title().TotalRecordCount > 0}>
-        <div ref={parent2} class='w-full h-full'>
-          {/* <img
-            ref={parent}
-            class='object-cover w-full h-full brightness-30'
-            src={
-              title().Items[cur()].Type === 'Episode'
-                ? getBackDropImage(
-                    title().Items[cur()].ParentBackdropItemId!,
-                    title().Items[cur()].ParentBackdropImageTags!,
-                  )
-                : getBackDropImage(title().Items[cur()].Id, title().Items[cur()].BackdropImageTags)
-            }
-            alt=''
-          /> */}
-          {backDropImg(title().Items[cur()])}
-        </div>
+        <img
+          class='object-cover w-full h-full brightness-30'
+          src={
+            title().Items[cur()].Type === 'Episode'
+              ? getBackDropImage(
+                  title().Items[cur()].ParentBackdropItemId!,
+                  title().Items[cur()].ParentBackdropImageTags!,
+                )
+              : getBackDropImage(title().Items[cur()].Id, title().Items[cur()].BackdropImageTags)
+          }
+          alt=''
+        />
         <div class='absolute top-0 left-0 w-full h-full shadow-edge' />
-        <div
-          ref={parent}
-          class='absolute top-[20%] h-[37%] left-[5%] w-9/10 [@media(max-height:34rem)]:hidden'
-        >
-          <Show when={title().Items[cur()].Type === 'Episode'} fallback={baseInfo(title().Items[cur()])}>
-            {/*             <BaseInfoEpisode val={title().Items[cur()]} /> */}
-            {baseInfoEpisode(title().Items[cur()])}
+        <div class='absolute top-[20%] h-[37%] left-[5%] w-9/10 [@media(max-height:34rem)]:hidden'>
+          <Show
+            when={title().Items[cur()].Type === 'Episode'}
+            fallback={<BaseInfo val={title().Items[cur()]} />}
+          >
+            <BaseInfoEpisode val={title().Items[cur()]} />
           </Show>
         </div>
         <Carousel

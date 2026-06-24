@@ -244,10 +244,6 @@ const Episode = () => {
     setItems(itemss)
   })
 
-  const [parent] = createAutoAnimate()
-
-  const baseInfoEpisode = (data: MediaInfoDetail) => <BaseInfoEpisode val={data} />
-
   return (
     <>
       <Back />
@@ -265,9 +261,8 @@ const Episode = () => {
       />
       <div class='absolute top-0 left-0 w-full h-full shadow-edge' />
       <Show when={episode().Keys.length > 0}>
-        <div ref={parent} class='absolute top-[20%] h-[37%] left-[5%] w-9/10'>
-          {/* <BaseInfoEpisode val={episode().Items[option.s][option.e]} /> */}
-          {baseInfoEpisode(episode().Items[option.s][option.e])}
+        <div class='absolute top-[20%] h-[37%] left-[5%] w-9/10'>
+          <BaseInfoEpisode val={episode().Items[option.s][option.e]} />
         </div>
         <Carousel class='fixed top-[57%] h-[31%] left-[5%] w-9/10 [@media(max-height:18rem)]:hidden flex overflow-x-auto  flex-row gap-8 py-2 px-2 scrollbar-none disable-select'>
           <For each={episode().Items[option.s]}>
