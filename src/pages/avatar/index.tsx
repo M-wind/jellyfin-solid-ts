@@ -36,7 +36,7 @@ const Avatar = (props: AvatarProps) => {
         updateState('pages', [{ id: 'Home', param: '' }])
         break
       case 'Logout':
-        sessionStorage.clear()
+        sessionStorage.removeItem('Authorization')
         logout().then((v) => {
           if (v.ok) location.reload()
         })

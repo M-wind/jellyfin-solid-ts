@@ -37,7 +37,7 @@ export const AppProvider = (props: { children: JSX.Element }) => {
   const [state, updateState] = createStore<AppStore>({
     theme: 'dark',
     userId: 'd8a32082e2f2499c85804019e4b509b0',
-    bgUrl: 'https://bing.ee123.net/img/',
+    bgUrl: 'https://bing.ee123.net/img/rand',
     uuid: btoa(new Date().getTime().toString()),
     route: 'connect',
     lang: navigator.language,

@@ -54,13 +54,13 @@ const Login = () => {
           <input
             type='text'
             placeholder={t('LabelUsername')}
-            class='px-2 w-72 h-12 border-b disable-default focus:border-primary'
+            class='px-2 w-72 h-12 border-b disable-default border-holder focus:border-primary'
             onChange={(e) => setUname(e.target.value)}
           />
           <input
             type='password'
             placeholder={t('LabelPassword')}
-            class='px-2 w-72 h-12 border-b disable-default focus:border-primary'
+            class='px-2 w-72 h-12 border-b disable-default border-holder focus:border-primary'
             onChange={(e) => setPwd(e.target.value)}
           />
           <Button
