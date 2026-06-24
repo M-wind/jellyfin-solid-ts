@@ -255,6 +255,8 @@ interface MediaInfo {
   ImageBlurHashes?: ImageBlurHashes
   ImageTags: ImageTags
   BackdropImageTags: string[]
+  ParentBackdropItemId?: string
+  ParentBackdropImageTags?: string[]
   Width?: number
   Height?: number
   ChildCount?: number

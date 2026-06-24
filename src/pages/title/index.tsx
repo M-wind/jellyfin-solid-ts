@@ -29,6 +29,7 @@ import HashImage from '../../components/hashImage'
 import { orginalItems } from '../base/item'
 import { Toggle } from '../../components/toggle'
 import { Items } from '../../components/menuItem'
+import { createAutoAnimate } from '@formkit/auto-animate/solid'
 
 interface MediaInfoDetailLetter extends MediaInfoDetail {
   Letter: string
@@ -73,11 +74,10 @@ const Title = () => {
     },
   )
 
-  const { Carousel, scrollT, scrollToPosition, carouselOption, needScroll, setOption } = CarouselWrapper(
-    {
-      padding: 16,
-    },
-  )
+  // const { Carousel, scrollT, scrollToPosition, carouselOption, needScroll, setOption } = CarouselWrapper(
+  const { Carousel, scrollT, scrollToPosition, carouselOption } = CarouselWrapper({
+    padding: 16,
+  })
 
   createEffect(
     on(
@@ -210,10 +210,10 @@ const Title = () => {
     }, {})
     setInLetters(letter)
     mutate(a)
-    if (a.TotalRecordCount === 0) return
-    setOption('cur', 0)
-    needScroll()
-    scrollToPosition(0)
+    // if (a.TotalRecordCount === 0) return
+    // setOption('cur', 0)
+    // needScroll()
+    // scrollToPosition(0)
   }
 
   const getItem = createMemo(() => {
@@ -247,6 +247,29 @@ const Title = () => {
     setItems(itemss)
   })
 
+  const getBackDropImage = (id: string, imgIds: string[]) => {
+    return getBackDropImageUrl(id, imgIds)
+  }
+
+  const baseInfo = (data: MediaInfoDetailLetter) => <BaseInfo val={data} />
+
+  const [parent] = createAutoAnimate()
+  const [parent2] = createAutoAnimate()
+
+  const backDropImg = (data: MediaInfoDetailLetter) => (
+    <img
+      class='object-cover w-full h-full brightness-30'
+      src={
+        data.Type === 'Episode'
+          ? getBackDropImage(data.ParentBackdropItemId!, data.ParentBackdropImageTags!)
+          : getBackDropImage(data.Id, data.BackdropImageTags)
+      }
+      alt=''
+    />
+  )
+
+  const baseInfoEpisode = (data: MediaInfoDetailLetter) => <BaseInfoEpisode val={data} />
+
   return (
     <>
       <Back />
@@ -255,27 +278,42 @@ const Title = () => {
             getImageUrl(val()?.Items[cur()].Id!, val()?.Items[cur()].ImageBlurHashes!, 'Backdrop'),
           )} */}
       <Show when={title().TotalRecordCount > 0}>
-        <img
-          class='object-cover w-full h-full brightness-30'
-          src={getBackDropImageUrl(title().Items[cur()].Id, title().Items[cur()].BackdropImageTags)}
-          alt=''
-        />
+        <div ref={parent2} class='w-full h-full'>
+          {/* <img
+            ref={parent}
+            class='object-cover w-full h-full brightness-30'
+            src={
+              title().Items[cur()].Type === 'Episode'
+                ? getBackDropImage(
+                    title().Items[cur()].ParentBackdropItemId!,
+                    title().Items[cur()].ParentBackdropImageTags!,
+                  )
+                : getBackDropImage(title().Items[cur()].Id, title().Items[cur()].BackdropImageTags)
+            }
+            alt=''
+          /> */}
+          {backDropImg(title().Items[cur()])}
+        </div>
         <div class='absolute top-0 left-0 w-full h-full shadow-edge' />
-        <div class='absolute top-[20%] h-[37%] left-[5%] w-9/10 [@media(max-height:34rem)]:hidden'>
-          <Show
-            when={title().Items[cur()].Type === 'Episode'}
-            fallback={<BaseInfo val={title().Items[cur()]} />}
-          >
-            <BaseInfoEpisode val={title().Items[cur()]} />
+        <div
+          ref={parent}
+          class='absolute top-[20%] h-[37%] left-[5%] w-9/10 [@media(max-height:34rem)]:hidden'
+        >
+          <Show when={title().Items[cur()].Type === 'Episode'} fallback={baseInfo(title().Items[cur()])}>
+            {/*             <BaseInfoEpisode val={title().Items[cur()]} /> */}
+            {baseInfoEpisode(title().Items[cur()])}
           </Show>
         </div>
-        <Carousel class='fixed top-[57%] h-[31%] left-[5%] w-9/10 [@media(max-height:18rem)]:hidden flex overflow-x-auto flex-row gap-8 py-2 px-2 scrollbar-none disable-select will-change-scroll'>
+        <Carousel
+          length={title().Items.length}
+          class='fixed top-[57%] h-[31%] left-[5%] w-9/10 [@media(max-height:18rem)]:hidden flex overflow-x-auto flex-row gap-8 py-2 px-2 scrollbar-none disable-select will-change-scroll'
+        >
           <For each={title().Items}>
             {(item, i) => (
               <div
                 class={`relative h-full shrink-0 rounded-xl bg-component ${
                   isSelected(i()) ? 'ring-8 ring-primary' : ''
-                } duration-300 ease-linear  ${item.Type === 'Episode' ? 'aspect-episode' : 'aspect-primary'} hover:ring-8 hover:ring-primary`}
+                } duration-300 ease-linear ${item.Type === 'Episode' ? 'aspect-episode' : 'aspect-primary'} hover:ring-8 hover:ring-primary`}
                 onMouseEnter={() => {
                   if (isSelected(i())) return
                   setCur(i())
