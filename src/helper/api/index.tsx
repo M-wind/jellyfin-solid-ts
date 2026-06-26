@@ -264,7 +264,7 @@ export const getMediaItemsByType = async (
     params: {
       SortBy: 'SortName',
       SortOrder: 'Ascending',
-      Fields: 'Overview,Width,ChildCount',
+      Fields: 'Overview,Width',
       Recursive: true,
       IncludeItemTypes: type,
       ...option,
