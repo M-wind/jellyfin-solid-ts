@@ -2,6 +2,7 @@ import { BsBadge4kFill, BsBadge8kFill, BsBadgeHdFill, BsBadgeSdFill } from 'soli
 import { TbInfoSquareFilled } from 'solid-icons/tb'
 import { For, Show } from 'solid-js'
 import { formatTime, getResolution, getTime, repaire0 } from '../../helper/utils'
+import { BiRegularShowAlt } from 'solid-icons/bi'
 
 type BaseInfoProps = {
   val?: MediaInfoDetail
@@ -37,6 +38,10 @@ const BaseInfo = (props: BaseInfoProps) => {
           <div class='w-3 h-3 rounded-full bg-from-to' />
           <div class='truncate'>{formatTime(props.val?.RunTimeTicks!)}</div>
         </Show>
+        <Show when={props.val?.UserData.PlaybackPositionTicks !== 0}>
+          <BiRegularShowAlt class='icon-screen text-indicator' />
+          <div class='truncate'>{formatTime(props.val?.UserData.PlaybackPositionTicks!)}</div>
+        </Show>
       </div>
       <p class='text-screen-clamp text-screen-overview text-secondary'>
         {<p>&emsp;&emsp;{props.val?.Overview?.trim() ?? ''}</p>}
@@ -70,6 +75,10 @@ const BaseInfoEpisode = (props: BaseInfoProps) => {
         <Show when={props.val?.RunTimeTicks}>
           <div class='w-3 h-3 rounded-full bg-from-to' />
           <div class='truncate'>{formatTime(props.val?.RunTimeTicks!)}</div>
+        </Show>
+        <Show when={props.val?.UserData.PlaybackPositionTicks !== 0}>
+          <BiRegularShowAlt class='icon-screen text-indicator' />
+          <div class='truncate'>{formatTime(props.val?.UserData.PlaybackPositionTicks!)}</div>
         </Show>
       </div>
       <p class='text-screen-clamp text-screen-overview text-secondary'>

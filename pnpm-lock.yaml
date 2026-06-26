@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@formkit/auto-animate':
-        specifier: 0.8.2
-        version: 0.8.2
+        specifier: 0.9.0
+        version: 0.9.0
       '@tailwindcss/vite':
         specifier: 4.0.15
         version: 4.0.15(vite@6.2.2(jiti@2.7.0)(lightningcss@1.29.2))
@@ -18,8 +18,8 @@ importers:
         specifier: 1.0.10
         version: 1.0.10
       fast-blurhash:
-        specifier: 1.1.4
-        version: 1.1.4
+        specifier: 1.2.0
+        version: 1.2.0
       hls.js:
         specifier: 1.5.20
         version: 1.5.20
@@ -27,8 +27,8 @@ importers:
         specifier: 1.1.0
         version: 1.1.0
       pinyin-pro:
-        specifier: 3.26.0
-        version: 3.26.0
+        specifier: 3.28.1
+        version: 3.28.1
       solid-icons:
         specifier: 1.1.0
         version: 1.1.0(solid-js@1.9.13)
@@ -281,8 +281,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@formkit/auto-animate@0.8.2':
-    resolution: {integrity: sha512-SwPWfeRa5veb1hOIBMdzI+73te5puUBHmqqaF1Bu7FjvxlYSz/kJcZKSa9Cg60zL0uRNeJL2SbRxV6Jp6Q1nFQ==}
+  '@formkit/auto-animate@0.9.0':
+    resolution: {integrity: sha512-VhP4zEAacXS3dfTpJpJ88QdLqMTcabMg0jwpOSxZ/VzfQVfl3GkZSCZThhGC5uhq/TxPHPzW0dzr4H9Bb1OgKA==}
 
   '@jridgewell/gen-mapping@0.3.12':
     resolution: {integrity: sha512-OuLGC46TjB5BbN1dH8JULVVZY4WTdkF7tV9Ys6wLL1rubZnCMstOhNHueU5bLCrnRuDhKPDM4g6sw4Bel5Gzqg==}
@@ -619,8 +619,8 @@ packages:
     resolution: {integrity: sha512-WUj2qlxaQtO4g6Pq5c29GTcWGDyd8itL8zTlipgECz3JesAiiOKotd8JU6otB3PACgG6xkJUyVhboMS+bje/jA==}
     engines: {node: '>=6'}
 
-  fast-blurhash@1.1.4:
-    resolution: {integrity: sha512-xeH121M027hgWHHhHWYYjUmMKl8vCH3PPkXk439ixsP8Bvb/r3UFqg12oMSToD/aSAw8EE6XiTdfZ6M5jaLfzg==}
+  fast-blurhash@1.2.0:
+    resolution: {integrity: sha512-wm3mTgQCR75eYb3I/QpsV8JNElZXv5jJCI5qTsPzypHRVXbCiYMozewXlYp/V28jDUM5NCYCsTZVJaHAs/oMVA==}
 
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
@@ -758,8 +758,8 @@ packages:
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
 
-  pinyin-pro@3.26.0:
-    resolution: {integrity: sha512-HcBZZb0pvm0/JkPhZHWA5Hqp2cWHXrrW/WrV+OtaYYM+kf35ffvZppIUuGmyuQ7gDr1JDJKMkbEE+GN0wfMoGg==}
+  pinyin-pro@3.28.1:
+    resolution: {integrity: sha512-oqz8ulwRgtUXRi0vbqEfGNly19zpyCxYrjhkk5TibGcgSW6eNwS5woajCXRwqURi8Ehc2yOFTiB4uNoZ+NJOnA==}
 
   postcss@8.5.15:
     resolution: {integrity: sha512-FfR8sjd4em2T6fb3I2MwAJU7HWVMr9zba+enmQeeWFfCbm+UOC/0X4DS8XtpUTMwWMGbjKYP7xjfNekzyGmB3A==}
@@ -1068,7 +1068,7 @@ snapshots:
   '@esbuild/win32-x64@0.25.1':
     optional: true
 
-  '@formkit/auto-animate@0.8.2': {}
+  '@formkit/auto-animate@0.9.0': {}
 
   '@jridgewell/gen-mapping@0.3.12':
     dependencies:
@@ -1342,7 +1342,7 @@ snapshots:
 
   escalade@3.2.0: {}
 
-  fast-blurhash@1.1.4: {}
+  fast-blurhash@1.2.0: {}
 
   fsevents@2.3.3:
     optional: true
@@ -1434,7 +1434,7 @@ snapshots:
 
   picocolors@1.1.1: {}
 
-  pinyin-pro@3.26.0: {}
+  pinyin-pro@3.28.1: {}
 
   postcss@8.5.15:
     dependencies:

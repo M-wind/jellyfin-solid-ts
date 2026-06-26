@@ -262,11 +262,23 @@ export const getMediaItemsByType = async (
 ) => {
   const res = await http.get<MediaItems>(`/Users/${userId}/Items`, {
     params: {
-      SortBy: 'SortName',
-      SortOrder: 'Ascending',
+      // SortBy: 'SortName',
+      // SortOrder: 'Ascending',
       Fields: 'Overview,Width',
       Recursive: true,
       IncludeItemTypes: type,
+      ...option,
+    },
+  })
+  return res.data
+}
+
+export const getResumeMediaItems = async (userId: string, option?: MediaItemOption) => {
+  const res = await http.get<MediaItems>(`/Users/${userId}/Items/Resume`, {
+    params: {
+      Fields: 'Overview,Width',
+      Recursive: true,
+      IncludeItemTypes: 'Movie,Episode',
       ...option,
     },
   })

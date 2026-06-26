@@ -98,6 +98,7 @@ type Pages =
   | 'MarkPlayed'
   | 'MarkUnplayed'
   | 'Filter'
+  | 'Resume'
 
 type TypeOption = {
   Type: MediaType | SeriesOption

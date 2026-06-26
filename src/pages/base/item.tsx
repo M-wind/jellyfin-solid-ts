@@ -2,18 +2,24 @@ import { TbHome, TbTransformFilled } from 'solid-icons/tb'
 import { Items } from '../../components/menuItem'
 import { FiLogOut } from 'solid-icons/fi'
 import { RiDocumentFoldersFill } from 'solid-icons/ri'
+import { BiRegularShowAlt } from 'solid-icons/bi'
 
 export const orginalItems = (t: NT, ex?: Items[]) => {
   const o: Items[] = [
     {
-      id: 'CodecProfile',
-      lable: t('Transcoding'),
-      icon: <TbTransformFilled class='text-2xl' />,
+      id: 'Resume',
+      lable: t('ContinueWatching'),
+      icon: <BiRegularShowAlt class='text-2xl' />
     },
     {
       id: 'MediaLibrary',
       lable: t('HeaderLibraries'),
       icon: <RiDocumentFoldersFill class='text-2xl' />,
+    },
+    {
+      id: 'CodecProfile',
+      lable: t('Transcoding'),
+      icon: <TbTransformFilled class='text-2xl' />,
     },
     {
       id: 'Home',

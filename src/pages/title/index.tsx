@@ -18,7 +18,7 @@ import {
 import CarouselWrapper from '../../components/carousel'
 import { Checked, CicleProgress } from '../../components/svg'
 import { useAppContext } from '../../context/AppContext'
-import { getMediaItemsByType, markPlayed, markUnplayed } from '../../helper/api'
+import { getMediaItemsByType, getResumeMediaItems, markPlayed, markUnplayed } from '../../helper/api'
 import { letters } from '../../helper/option'
 import { getBackDropImageUrl, getHash, getImageUrl } from '../../helper/utils'
 import Avatar from '../avatar'
@@ -57,6 +57,7 @@ const Title = () => {
   const param = state.pages[state.pages.length - 1].param
   const mediaType: MediaType = param?.type
   const option: MediaItemOption = param?.option
+  const resume: boolean = param?.resume
 
   const [titleD, setTitleD] = createStore<{
     Items: MediaInfoDetailLetter[]
@@ -71,7 +72,9 @@ const Title = () => {
   const [searchP, setSearchP] = createSignal(param?.searchP || '')
 
   const fetch = async () => {
-    const data = await getMediaItemsByType(state.userId, mediaType, option)
+    const data = resume
+      ? await getResumeMediaItems(state.userId)
+      : await getMediaItemsByType(state.userId, mediaType, option)
     // const data = await tempMockData()
     const d = {
       Items: sortByLetter(data.Items),
@@ -246,7 +249,7 @@ const Title = () => {
           />
         ),
       },
-    ])
+    ]).filter((v) => v.id !== 'Resume')
   })
 
   const [items, setItems] = createSignal(getItem())

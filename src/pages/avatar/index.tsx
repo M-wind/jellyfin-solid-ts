@@ -25,11 +25,14 @@ const Avatar = (props: AvatarProps) => {
       case 'MarkPlayed':
         if (props.onMark) props.onMark(true)
         break
-      case 'CodecProfile':
-        updatePage('CodecProfile')
+      case 'Resume':
+        updatePage('Title', { resume: true })
         break
       case 'MediaLibrary':
         updatePage('MediaLibrary')
+        break
+      case 'CodecProfile':
+        updatePage('CodecProfile')
         break
       case 'Home':
         if (state.pages.length === 1) return
@@ -46,10 +49,10 @@ const Avatar = (props: AvatarProps) => {
     }
   }
 
-  const updatePage = (id: Pages) => {
+  const updatePage = (id: Pages, param?: any) => {
     const pages = [...state.pages]
     if (pages[pages.length - 1].id === id) return
-    pages.push({ id })
+    pages.push({ id, param })
     updateState('pages', pages)
   }
 
