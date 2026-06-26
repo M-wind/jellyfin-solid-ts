@@ -31,7 +31,7 @@
 
   --animate-slideInRight: slideInRight 800ms;
   --animate-fadeIn: fadeIn ease-in 300ms;
-  --animate-zoomIn: zoomIn ease-in 300ms;
+  --animate-zoomIn: zoomIn ease-out 500ms;
 
   --spacing-angle-center: calc(50% - 6px);
   --spacing-video-osd: calc(100% + 2.5rem);
