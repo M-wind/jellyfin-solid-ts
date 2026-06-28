@@ -1,5 +1,5 @@
 {
-  "name": "jellyfin-solid-ts",
+  "name": "jellyfin-web-solidjs",
   "version": "1.0.0",
   "description": "Jellyfin Web Page",
   "type": "module",
